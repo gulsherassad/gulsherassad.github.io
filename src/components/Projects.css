@@ -1,0 +1,204 @@
+.projects {
+  --index-col: 4rem;
+  --year-col: 4rem;
+  --col-gap: var(--space-6);
+
+  padding-block: var(--space-24) var(--space-32);
+}
+
+.projects__label {
+  margin-bottom: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.projects__list {
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.project {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Row button */
+
+.project__toggle {
+  display: grid;
+  grid-template-columns: var(--index-col) minmax(0, 1fr) auto var(--year-col);
+  grid-template-areas: 'index main highlight year';
+  align-items: baseline;
+  column-gap: var(--col-gap);
+  width: 100%;
+  padding: var(--space-8) 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.project__index {
+  grid-area: index;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.project__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  grid-area: main;
+}
+
+.project__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  line-height: 1.1;
+}
+
+.project__tagline {
+  color: var(--muted);
+}
+
+.project__highlight {
+  grid-area: highlight;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  text-align: right;
+}
+
+.project__year {
+  grid-area: year;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+  text-align: right;
+}
+
+.project__index,
+.project__title {
+  transition:
+    transform 300ms var(--ease-out),
+    color 300ms var(--ease-out);
+}
+
+.project__toggle:focus-visible .project__index,
+.project__toggle:focus-visible .project__title {
+  transform: translateX(8px);
+}
+
+.project__toggle:focus-visible .project__index,
+.project__toggle[aria-expanded='true'] .project__index {
+  color: var(--accent);
+}
+
+/* Hover only on devices that can hover, so a tap doesn't leave rows shifted. */
+@media (hover: hover) {
+  .project__toggle:hover .project__index,
+  .project__toggle:hover .project__title {
+    transform: translateX(8px);
+  }
+
+  .project__toggle:hover .project__index {
+    color: var(--accent);
+  }
+}
+
+/* Expanded panel */
+
+.project__panel {
+  overflow: hidden;
+}
+
+.project__panel-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding-bottom: var(--space-10);
+  padding-inline-start: calc(var(--index-col) + var(--col-gap));
+}
+
+.project__image {
+  width: 100%;
+  max-width: 48rem;
+  height: auto;
+}
+
+.project__description {
+  max-width: 60ch;
+}
+
+.project__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.project__stack li {
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+}
+
+.project__role {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.project__links {
+  display: flex;
+  gap: var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.project__links a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 200ms var(--ease-out);
+}
+
+.project__links a:hover {
+  color: var(--accent);
+}
+
+/* Mobile: index + year, then title, tagline, highlight. */
+
+@media (max-width: 48rem) {
+  .project__toggle {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'index year'
+      'main main'
+      'highlight highlight';
+    row-gap: var(--space-3);
+    padding-block: var(--space-6);
+  }
+
+  .project__highlight {
+    text-align: left;
+  }
+
+  .project__panel-inner {
+    padding-inline-start: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project__toggle .project__index,
+  .project__toggle .project__title {
+    transform: none !important;
+  }
+}

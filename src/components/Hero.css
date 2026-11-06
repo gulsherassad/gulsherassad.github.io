@@ -1,0 +1,49 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 85vh;
+  min-height: 85svh;
+  padding-block: var(--space-16) var(--space-20);
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Each line is masked so it can slide up from below its own box. The line's
+   bottom padding keeps descenders inside the mask; the negative margin
+   cancels it so line spacing stays at line-height. */
+.hero__mask {
+  display: block;
+  overflow: hidden;
+  margin-bottom: -0.12em;
+}
+
+.hero__line {
+  display: block;
+  padding-bottom: 0.12em;
+}
+
+.hero__title em {
+  font-style: italic;
+}
+
+.hero__meta {
+  margin-top: var(--space-12);
+}
+
+.hero__intro {
+  max-width: 42ch;
+  color: var(--muted);
+}
+
+.hero__location {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
