@@ -4,14 +4,11 @@
   --icon-size: 20px;
   --col-gap: var(--space-6);
 
-  padding-block: var(--space-24) var(--space-32);
+  padding-top: var(--space-24);
 }
 
 .projects__label {
   margin-bottom: var(--space-8);
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--muted);
 }
 
 .projects__list {
@@ -195,27 +192,38 @@
   border-radius: 999px;
 }
 
-.project__role {
+/* Role · Code ↗ · Live ↗ — the dot sits after each item, so a wrapped line
+   ends with a dot rather than starting with one. */
+.project__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: var(--space-2);
+  padding: 0;
   font-family: var(--font-mono);
   font-size: var(--text-small);
-  color: var(--muted);
-}
-
-.project__links {
-  display: flex;
-  gap: var(--space-6);
-  padding: 0;
   list-style: none;
 }
 
-.project__links a {
+.project__meta li:not(:last-child)::after {
+  margin-inline: var(--space-3);
+  color: var(--muted);
+  content: '·';
+  content: '·' / '';
+}
+
+.project__meta-role {
+  color: var(--muted);
+}
+
+.project__meta a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.25em;
   transition: color 200ms var(--ease-out);
 }
 
-.project__links a:hover {
+.project__meta a:hover {
   color: var(--accent);
 }
 

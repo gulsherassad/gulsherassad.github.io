@@ -1,0 +1,13 @@
+.about {
+  padding-top: var(--section-space);
+}
+
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+  max-width: 60ch;
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  text-wrap: pretty;
+}

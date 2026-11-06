@@ -48,3 +48,24 @@ section[id] {
   white-space: nowrap;
   border: 0;
 }
+
+/* Small mono label used as a section heading. */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+/* Label column + content column (About, Contact). Single column on mobile. */
+.split {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: baseline;
+    gap: var(--space-6);
+  }
+}

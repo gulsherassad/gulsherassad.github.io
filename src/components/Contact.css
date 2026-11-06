@@ -1,0 +1,96 @@
+.contact {
+  padding-block: var(--section-space);
+}
+
+.contact__lead {
+  font-family: var(--font-serif);
+  font-size: var(--text-h2);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.contact__email-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-6);
+}
+
+/* Underline draws in left to right on hover / focus. */
+.contact__email {
+  position: relative;
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  line-height: 1.2;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 300ms var(--ease-out);
+}
+
+.contact__email::after {
+  position: absolute;
+  inset: auto 0 -0.05em;
+  height: 1px;
+  content: '';
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms var(--ease-out);
+}
+
+.contact__email:hover,
+.contact__email:focus-visible {
+  color: var(--accent);
+}
+
+.contact__email:hover::after,
+.contact__email:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.contact__copy {
+  min-width: 7ch; /* so "Copy" → "Copied" doesn't shift anything */
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out);
+}
+
+/* Hover only where hover exists, so a tap doesn't leave the button accented. */
+@media (hover: hover) {
+  .contact__copy:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-12);
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  list-style: none;
+}
+
+.contact__links a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 200ms var(--ease-out);
+}
+
+.contact__links a:hover {
+  color: var(--accent);
+}

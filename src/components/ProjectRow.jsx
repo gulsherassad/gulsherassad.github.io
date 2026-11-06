@@ -1,16 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react';
+import ExternalLink from './ExternalLink.jsx';
 import { pad } from './pad.js';
 
 const EASE = [0.22, 1, 0.36, 1];
-
-function ExternalLink({ href, children }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children} <span aria-hidden="true">↗</span>
-      <span className="visually-hidden"> (opens in a new tab)</span>
-    </a>
-  );
-}
 
 export default function ProjectRow({
   project,
@@ -88,16 +80,16 @@ export default function ProjectRow({
                   <li key={tech}>{tech}</li>
                 ))}
               </ul>
-              <p className="project__role">{project.role}</p>
-              <ul className="project__links">
+              <ul className="project__meta">
+                <li className="project__meta-role">Role: {project.role}</li>
+                <li>
+                  <ExternalLink href={project.repo}>Code</ExternalLink>
+                </li>
                 {project.live && (
                   <li>
                     <ExternalLink href={project.live}>Live</ExternalLink>
                   </li>
                 )}
-                <li>
-                  <ExternalLink href={project.repo}>Code</ExternalLink>
-                </li>
               </ul>
             </div>
           </motion.div>

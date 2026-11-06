@@ -17,7 +17,7 @@ export default function Projects() {
       className="projects container"
       aria-labelledby="projects-heading"
     >
-      <h2 id="projects-heading" className="projects__label">
+      <h2 id="projects-heading" className="section-label projects__label">
         Selected work ({pad(projects.length)})
       </h2>
       <ul className="projects__list">

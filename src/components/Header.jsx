@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import ExternalLink from './ExternalLink.jsx';
+import { RESUME_URL } from '../data/links.js';
 import './Header.css';
 
 const NAV_LINKS = [
@@ -31,10 +33,7 @@ export default function Header() {
               </li>
             ))}
             <li>
-              {/* TODO: link to the resume PDF (and open in a new tab) once it exists. */}
-              <a href="#">
-                Resume <span aria-hidden="true">↗</span>
-              </a>
+              <ExternalLink href={RESUME_URL}>Resume</ExternalLink>
             </li>
           </ul>
         </nav>
