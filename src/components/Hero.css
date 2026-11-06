@@ -1,22 +1,27 @@
 .hero {
+  /* Lets the headline size itself to this box's content width (cqi). */
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 85vh;
-  min-height: 85svh;
+  min-height: min(85vh, 760px);
+  min-height: min(85svh, 760px);
   padding-block: var(--space-16) var(--space-20);
 }
 
 .hero__title {
   font-family: var(--font-serif);
-  font-size: var(--text-display);
+  /* Narrow screens: lines wrap, but never smaller than needed to keep
+     "and measure whether" (7.18em) on one line, so "whether" isn't orphaned. */
+  font-size: min(var(--text-display), 100cqi / 7.4);
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
 /* Each line is masked so it can slide up from below its own box. The line's
    bottom padding keeps descenders inside the mask; the negative margin
-   cancels it so line spacing stays at line-height. */
+   cancels it so line spacing stays at line-height. Lines may wrap inside
+   their mask on narrow screens. */
 .hero__mask {
   display: block;
   overflow: hidden;
@@ -26,6 +31,19 @@
 .hero__line {
   display: block;
   padding-bottom: 0.12em;
+  text-wrap: balance;
+}
+
+/* Wide screens: exactly three lines. The size is capped so the longest line
+   ("I build software and ML systems —", measured at 11.03em) always fits the container. */
+@media (min-width: 900px) {
+  .hero__title {
+    font-size: min(var(--text-display), 100cqi / 11.4);
+  }
+
+  .hero__line {
+    white-space: nowrap;
+  }
 }
 
 .hero__title em {
@@ -37,8 +55,9 @@
 }
 
 .hero__intro {
-  max-width: 42ch;
+  max-width: 46ch;
   color: var(--muted);
+  text-wrap: pretty;
 }
 
 .hero__location {

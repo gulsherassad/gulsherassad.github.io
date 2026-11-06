@@ -52,6 +52,9 @@ export default function ProjectRow({
           </span>
           <span className="project__highlight">{project.highlight}</span>
           <span className="project__year">{project.year}</span>
+          <span className="project__icon" aria-hidden="true">
+            <span className="project__plus" />
+          </span>
         </button>
       </h3>
 

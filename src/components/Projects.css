@@ -1,6 +1,7 @@
 .projects {
   --index-col: 4rem;
   --year-col: 4rem;
+  --icon-size: 20px;
   --col-gap: var(--space-6);
 
   padding-block: var(--space-24) var(--space-32);
@@ -27,8 +28,10 @@
 
 .project__toggle {
   display: grid;
-  grid-template-columns: var(--index-col) minmax(0, 1fr) auto var(--year-col);
-  grid-template-areas: 'index main highlight year';
+  grid-template-columns:
+    var(--index-col) minmax(0, 1fr) auto var(--year-col)
+    var(--icon-size);
+  grid-template-areas: 'index main highlight year icon';
   align-items: baseline;
   column-gap: var(--col-gap);
   width: 100%;
@@ -63,6 +66,7 @@
 
 .project__tagline {
   color: var(--muted);
+  text-wrap: balance;
 }
 
 .project__highlight {
@@ -80,19 +84,59 @@
   text-align: right;
 }
 
+/* +/× indicator: two 1px bars; rotating 45° turns + into ×. The box is as
+   tall as the title's first line so the icon centres on it. */
+.project__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: icon;
+  align-self: start;
+  height: calc(var(--text-title) * 1.1);
+  color: var(--muted);
+  transition: color 300ms var(--ease-out);
+}
+
+.project__plus {
+  position: relative;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  transition: transform 300ms var(--ease-out);
+}
+
+.project__plus::before,
+.project__plus::after {
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1px;
+  content: '';
+  background-color: currentColor;
+}
+
+.project__plus::after {
+  transform: rotate(90deg);
+}
+
+.project__toggle[aria-expanded='true'] .project__plus {
+  transform: rotate(45deg);
+}
+
+/* Hover / focus states */
+
 .project__index,
-.project__title {
+.project__main {
   transition:
     transform 300ms var(--ease-out),
     color 300ms var(--ease-out);
 }
 
 .project__toggle:focus-visible .project__index,
-.project__toggle:focus-visible .project__title {
+.project__toggle:focus-visible .project__main {
   transform: translateX(8px);
 }
 
 .project__toggle:focus-visible .project__index,
+.project__toggle:focus-visible .project__icon,
 .project__toggle[aria-expanded='true'] .project__index {
   color: var(--accent);
 }
@@ -100,11 +144,12 @@
 /* Hover only on devices that can hover, so a tap doesn't leave rows shifted. */
 @media (hover: hover) {
   .project__toggle:hover .project__index,
-  .project__toggle:hover .project__title {
+  .project__toggle:hover .project__main {
     transform: translateX(8px);
   }
 
-  .project__toggle:hover .project__index {
+  .project__toggle:hover .project__index,
+  .project__toggle:hover .project__icon {
     color: var(--accent);
   }
 }
@@ -174,17 +219,22 @@
   color: var(--accent);
 }
 
-/* Mobile: index + year, then title, tagline, highlight. */
+/* Narrow: index + year + icon, then title, tagline, highlight. */
 
-@media (max-width: 48rem) {
+@media (max-width: 56rem) {
   .project__toggle {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto var(--icon-size);
     grid-template-areas:
-      'index year'
-      'main main'
-      'highlight highlight';
+      'index year icon'
+      'main main main'
+      'highlight highlight highlight';
     row-gap: var(--space-3);
     padding-block: var(--space-6);
+  }
+
+  .project__icon {
+    align-self: center;
+    height: auto;
   }
 
   .project__highlight {
@@ -198,7 +248,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .project__toggle .project__index,
-  .project__toggle .project__title {
+  .project__toggle .project__main {
     transform: none !important;
   }
 }
