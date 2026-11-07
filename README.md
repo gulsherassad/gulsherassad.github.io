@@ -1,6 +1,6 @@
 # Gulsher Assad — Portfolio
 
-Personal portfolio site, live at <https://gulsherassad.github.io/portfolio/>.
+Personal portfolio site, live at <https://gulsherassad.github.io/>.
 
 ## Stack
 
@@ -13,7 +13,7 @@ Personal portfolio site, live at <https://gulsherassad.github.io/portfolio/>.
 
 ```sh
 npm install
-npm run dev      # start dev server at http://localhost:5173/portfolio/
+npm run dev      # start dev server at http://localhost:5173/
 npm run build    # production build to dist/
 npm run preview  # serve the production build
 npm run lint     # lint with oxlint
@@ -38,7 +38,8 @@ After adding or replacing a screenshot, update its `width` and `height` in
 
 Every push to `main` triggers `.github/workflows/deploy.yml`, which runs
 `npm ci && npm run build` and publishes `dist/` to GitHub Pages.
-Vite's `base` is set to `/portfolio/` to match the Pages URL.
+The repo is named `gulsherassad.github.io`, so Pages serves it from the
+domain root and Vite's `base` is `/`.
 
 One-time setup: in the repo's **Settings → Pages**, set **Source** to
 **GitHub Actions**.

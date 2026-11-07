@@ -76,7 +76,7 @@ const tree = h(
       borderTop: `1px solid ${RULE}`,
       ...mono,
     },
-    h('span', {}, 'gulsherassad.github.io/portfolio'),
+    h('span', {}, 'gulsherassad.github.io'),
     h('span', {}, 'EPL Predictor · Querybird · Scout'),
   ),
 );
