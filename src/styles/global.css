@@ -1,5 +1,7 @@
 html {
   scroll-behavior: smooth; /* reset.css turns this off for reduced motion */
+  /* Anchor jumps and focus scrolling stop below the sticky header. */
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -27,8 +29,45 @@ a {
   outline-offset: 3px;
 }
 
-section[id] {
-  scroll-margin-top: var(--header-offset);
+/* <main tabindex="-1"> is only focused as the skip-link target. */
+main:focus {
+  outline: none;
+}
+
+/* Hidden until focused; first focusable element on the page. */
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-small);
+  color: var(--bg);
+  text-decoration: none;
+  background-color: var(--text);
+  border-radius: 4px;
+  transform: translateY(calc(-100% - var(--space-6)));
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* Grows a small link/button's hit area to at least 44 x 44px with an
+   invisible, centred ::after, without changing its visual size or layout. */
+.tap-target {
+  position: relative;
+  display: inline-block;
+}
+
+.tap-target::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  content: '';
+  transform: translate(-50%, -50%);
 }
 
 .container {

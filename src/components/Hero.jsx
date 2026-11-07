@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import './Hero.css';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -19,30 +19,30 @@ export default function Hero() {
       <h1 className="hero__title">
         {LINES.map((line, i) => (
           <span className="hero__mask" key={i}>
-            <motion.span
+            <m.span
               className="hero__line"
               initial={reduceMotion ? false : { y: '100%' }}
               animate={{ y: '0%' }}
               transition={{ duration: 0.9, ease: EASE, delay: i * 0.08 }}
             >
               {line}
-            </motion.span>
+            </m.span>
           </span>
         ))}
       </h1>
 
-      <motion.div
+      <m.div
         className="hero__meta"
         initial={reduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: EASE, delay: 0.7 }}
+        transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
       >
         <p className="hero__intro">
           Fourth-year Computer Science student at UBC Okanagan. Looking for 2027
           co-op roles in software engineering and ML.
         </p>
         <p className="hero__location">Kelowna, BC · Available 2027</p>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

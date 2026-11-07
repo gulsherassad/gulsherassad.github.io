@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import ExternalLink from './ExternalLink.jsx';
 import ProjectShowcase from './ProjectShowcase.jsx';
 import { pad } from './pad.js';
@@ -17,7 +17,7 @@ export default function ProjectRow({
   const panelId = `project-${project.id}-panel`;
 
   return (
-    <motion.li
+    <m.li
       className="project"
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export default function ProjectRow({
 
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div
+          <m.div
             key="panel"
             id={panelId}
             role="region"
@@ -84,11 +84,21 @@ export default function ProjectRow({
                 <ul className="project__meta">
                   <li className="project__meta-role">Role: {project.role}</li>
                   <li>
-                    <ExternalLink href={project.repo}>Code</ExternalLink>
+                    <ExternalLink href={project.repo} className="tap-target">
+                      Code
+                    </ExternalLink>
                   </li>
                   {project.live && (
                     <li>
-                      <ExternalLink href={project.live}>Live</ExternalLink>
+                      <ExternalLink href={project.live} className="tap-target">
+                        Live
+                      </ExternalLink>
+                      {project.liveNote && (
+                        <span className="project__live-note">
+                          {' '}
+                          ({project.liveNote})
+                        </span>
+                      )}
                     </li>
                   )}
                 </ul>
@@ -99,9 +109,9 @@ export default function ProjectRow({
                 reduceMotion={reduceMotion}
               />
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.li>
+    </m.li>
   );
 }

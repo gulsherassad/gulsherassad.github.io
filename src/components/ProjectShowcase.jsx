@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { assetUrl } from './assetUrl.js';
 import './ProjectShowcase.css';
 
@@ -30,8 +30,8 @@ function BrowserFrame({ image, url, dark }) {
         className="browser__image"
         src={assetUrl(image.src)}
         alt={image.alt}
-        width={1600}
-        height={1000}
+        width={image.width}
+        height={image.height}
         loading="lazy"
         decoding="async"
       />
@@ -71,7 +71,7 @@ export default function ProjectShowcase({ images, theme, reduceMotion }) {
     : { variants: { lifted: { y: -4 } }, transition: LIFT };
 
   return (
-    <motion.div
+    <m.div
       className={
         secondary ? 'showcase showcase--pair' : 'showcase showcase--single'
       }
@@ -81,25 +81,25 @@ export default function ProjectShowcase({ images, theme, reduceMotion }) {
       transition={{ duration: 0.4 }}
       {...(reduceMotion ? {} : { whileHover: 'lifted' })}
     >
-      <motion.div
+      <m.div
         className="showcase__slot showcase__slot--primary"
         {...enter({ y: 32 }, 0.1)}
       >
-        <motion.div {...lift}>
+        <m.div {...lift}>
           <BrowserFrame image={primary} url={theme?.url} dark={dark} />
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
       {secondary && (
-        <motion.div
+        <m.div
           className="showcase__slot showcase__slot--secondary"
           {...enter({ x: 32, y: 16 }, 0.25)}
         >
-          <motion.div {...lift}>
+          <m.div {...lift}>
             <BrowserFrame image={secondary} url={theme?.url} dark={dark} />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
-    </motion.div>
+    </m.div>
   );
 }

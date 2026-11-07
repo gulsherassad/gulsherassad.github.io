@@ -13,19 +13,20 @@
   position: absolute;
 }
 
-/* One image: centred, ~92% wide, set slightly into the bottom edge. */
+/* One image: centred, 88% wide, set slightly into the bottom edge. */
 .showcase--single .showcase__slot--primary {
   bottom: -5%;
-  left: 4%;
-  width: 92%;
+  left: 6%;
+  width: 88%;
 }
 
-/* Two images: the first top-left; the second smaller, overlapping it
-   bottom-right (~40% of the second's area) and bleeding off the bottom. */
+/* Two images: the first top-left, fully inside the backdrop; the second
+   smaller, overlapping it bottom-right and bleeding off the bottom. Frames
+   are 4:3, so widths are kept below 0.75 x backdrop height + chrome. */
 .showcase--pair .showcase__slot--primary {
   top: 8%;
   left: 6%;
-  width: 82%;
+  width: 76%;
 }
 
 .showcase--pair .showcase__slot--secondary {
@@ -115,7 +116,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3; /* screenshots are taller; crop from the top down */
   object-fit: cover;
   object-position: top;
 }

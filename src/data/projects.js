@@ -11,14 +11,19 @@ const projects = [
     year: 2026,
     repo: 'https://github.com/gulsherassad/epl-predictor',
     live: 'https://epl-predictor-xmqs.onrender.com',
+    liveNote: 'may take ~30s to wake', // free-tier host spins down when idle
     theme: { bg: '#2B0B3F', url: 'epl-predictor-xmqs.onrender.com' },
     images: [
       {
         src: 'projects/epl-1.webp',
+        width: 1035,
+        height: 1176,
         alt: 'EPL Predictor match view with win, draw and away-win probabilities for Arsenal vs Chelsea',
       },
       {
         src: 'projects/epl-2.webp',
+        width: 1103,
+        height: 1092,
         alt: 'EPL Predictor model performance and recent predictions',
       },
     ],
@@ -39,6 +44,8 @@ const projects = [
     images: [
       {
         src: 'projects/querybird.webp',
+        width: 1036,
+        height: 1176,
         alt: 'Querybird turning a plain-English question into a SQL query and its result',
       },
     ],
@@ -66,10 +73,14 @@ const projects = [
     images: [
       {
         src: 'projects/scout-1.webp',
+        width: 1148,
+        height: 1058,
         alt: 'Scout results listing the players most similar to Bukayo Saka',
       },
       {
         src: 'projects/scout-2.webp',
+        width: 1230,
+        height: 980,
         alt: 'Scout style map plotting attackers so similar playing styles cluster together',
       },
     ],
@@ -90,10 +101,14 @@ const projects = [
     images: [
       {
         src: 'projects/macro-2.webp',
+        width: 1200,
+        height: 900,
         alt: 'Macro Meal Optimizer day plan with macro targets and solved totals',
       },
       {
         src: 'projects/macro-1.webp',
+        width: 1200,
+        height: 720,
         alt: 'Macro Meal Optimizer food library',
       },
     ],

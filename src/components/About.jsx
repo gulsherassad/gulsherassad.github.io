@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import './About.css';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -24,7 +24,7 @@ export default function About() {
         </h2>
         <div className="about__body">
           {PARAGRAPHS.map((text, i) => (
-            <motion.p
+            <m.p
               key={i}
               initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export default function About() {
               }
             >
               {text}
-            </motion.p>
+            </m.p>
           ))}
         </div>
       </div>

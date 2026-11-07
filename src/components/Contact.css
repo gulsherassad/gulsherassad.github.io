@@ -42,7 +42,7 @@
 
 .contact__email:hover,
 .contact__email:focus-visible {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .contact__email:hover::after,
@@ -68,7 +68,7 @@
 /* Hover only where hover exists, so a tap doesn't leave the button accented. */
 @media (hover: hover) {
   .contact__copy:hover {
-    color: var(--accent);
+    color: var(--accent-text);
     border-color: var(--accent);
   }
 }
@@ -92,5 +92,5 @@
 }
 
 .contact__links a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }

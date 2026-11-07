@@ -3,21 +3,30 @@ import ExternalLink from './ExternalLink.jsx';
 import { EMAIL, GITHUB_URL, LINKEDIN_URL, RESUME_URL } from '../data/links.js';
 import './Contact.css';
 
+const BUTTON_LABEL = { idle: 'Copy', copied: 'Copied', failed: 'Copy failed' };
+const ANNOUNCEMENT = {
+  idle: '',
+  copied: 'Email address copied',
+  failed: 'Could not copy the email address',
+};
+
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
+  // 'idle' | 'copied' | 'failed'; copied/failed revert to idle after 2s.
+  const [status, setStatus] = useState('idle');
   const timer = useRef();
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
   const copyEmail = async () => {
+    let next = 'copied';
     try {
       await navigator.clipboard.writeText(EMAIL);
     } catch {
-      return; // Clipboard unavailable or denied: fail silently.
+      next = 'failed'; // Clipboard unavailable or permission denied.
     }
-    setCopied(true);
+    setStatus(next);
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setCopied(false), 2000);
+    timer.current = setTimeout(() => setStatus('idle'), 2000);
   };
 
   return (
@@ -37,24 +46,34 @@ export default function Contact() {
             <a className="contact__email" href={`mailto:${EMAIL}`}>
               {EMAIL}
             </a>
-            <button type="button" className="contact__copy" onClick={copyEmail}>
-              {copied ? 'Copied' : 'Copy'}
+            <button
+              type="button"
+              className="contact__copy tap-target"
+              onClick={copyEmail}
+            >
+              {BUTTON_LABEL[status]}
               <span className="visually-hidden"> email address</span>
             </button>
             <span className="visually-hidden" aria-live="polite">
-              {copied ? 'Email address copied' : ''}
+              {ANNOUNCEMENT[status]}
             </span>
           </div>
 
           <ul className="contact__links">
             <li>
-              <ExternalLink href={GITHUB_URL}>GitHub</ExternalLink>
+              <ExternalLink href={GITHUB_URL} className="tap-target">
+                GitHub
+              </ExternalLink>
             </li>
             <li>
-              <ExternalLink href={LINKEDIN_URL}>LinkedIn</ExternalLink>
+              <ExternalLink href={LINKEDIN_URL} className="tap-target">
+                LinkedIn
+              </ExternalLink>
             </li>
             <li>
-              <ExternalLink href={RESUME_URL}>Resume</ExternalLink>
+              <ExternalLink href={RESUME_URL} className="tap-target">
+                Resume
+              </ExternalLink>
             </li>
           </ul>
         </div>

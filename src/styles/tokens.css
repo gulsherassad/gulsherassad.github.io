@@ -1,10 +1,13 @@
 :root {
-  /* Colour. Accent is for hover / focus / active states only. */
+  /* Colour. Accent is for hover / focus / active states only: --accent for
+     outlines, borders and icons (3.6:1, fine for non-text); --accent-text for
+     accent-coloured text (4.8:1, passes AA). */
   --bg: #f4f2ee;
   --text: #141414;
   --muted: #6b6862;
   --rule: #d9d5cd;
   --accent: #e5461f;
+  --accent-text: #c4381a;
 
   /* Font families */
   --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
@@ -40,7 +43,9 @@
   --max-width: 1240px;
   --gutter: clamp(20px, 5vw, 64px);
   --section-space: clamp(96px, 14vw, 200px); /* gap between sections */
-  --header-offset: 5rem; /* scroll-margin so anchors clear the sticky header */
+  /* Sticky header's live height, kept in sync by Header.jsx; the fallback
+     is its desktop height. Used for html's scroll-padding-top. */
+  --header-height: 4.5rem;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);

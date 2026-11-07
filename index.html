@@ -20,6 +20,16 @@
     />
     <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
 
+    <!-- Hero headline font. Vite hashes this to the same file the
+         @font-face in main.jsx's font CSS points at. -->
+    <link
+      rel="preload"
+      href="/node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Gulsher Assad — Software &amp; ML" />

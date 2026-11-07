@@ -135,8 +135,11 @@
 }
 
 .project__toggle:focus-visible .project__index,
-.project__toggle:focus-visible .project__icon,
 .project__toggle[aria-expanded='true'] .project__index {
+  color: var(--accent-text);
+}
+
+.project__toggle:focus-visible .project__icon {
   color: var(--accent);
 }
 
@@ -147,7 +150,10 @@
     transform: translateX(8px);
   }
 
-  .project__toggle:hover .project__index,
+  .project__toggle:hover .project__index {
+    color: var(--accent-text);
+  }
+
   .project__toggle:hover .project__icon {
     color: var(--accent);
   }
@@ -237,7 +243,11 @@
 }
 
 .project__meta a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
+}
+
+.project__live-note {
+  color: var(--muted);
 }
 
 /* Narrow: index + year + icon, then title, tagline, highlight. */
