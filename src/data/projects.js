@@ -11,7 +11,17 @@ const projects = [
     year: 2026,
     repo: 'https://github.com/gulsherassad/epl-predictor',
     live: 'https://epl-predictor-xmqs.onrender.com',
-    image: null,
+    theme: { bg: '#2B0B3F', url: 'epl-predictor-xmqs.onrender.com' },
+    images: [
+      {
+        src: 'projects/epl-1.webp',
+        alt: 'EPL Predictor match view with win, draw and away-win probabilities for Arsenal vs Chelsea',
+      },
+      {
+        src: 'projects/epl-2.webp',
+        alt: 'EPL Predictor model performance and recent predictions',
+      },
+    ],
   },
   {
     id: 'querybird',
@@ -25,7 +35,13 @@ const projects = [
     year: 2026,
     repo: 'https://github.com/gulsherassad/querybird',
     live: null,
-    image: null,
+    theme: { bg: '#D6E2DA', url: 'querybird.local' },
+    images: [
+      {
+        src: 'projects/querybird.webp',
+        alt: 'Querybird turning a plain-English question into a SQL query and its result',
+      },
+    ],
   },
   {
     id: 'scout',
@@ -46,7 +62,17 @@ const projects = [
     year: 2026,
     repo: 'https://github.com/gulsherassad/scout',
     live: null,
-    image: null,
+    theme: { bg: '#E8E1D3', url: 'scout.local' },
+    images: [
+      {
+        src: 'projects/scout-1.webp',
+        alt: 'Scout results listing the players most similar to Bukayo Saka',
+      },
+      {
+        src: 'projects/scout-2.webp',
+        alt: 'Scout style map plotting attackers so similar playing styles cluster together',
+      },
+    ],
   },
   {
     id: 'macro-optimizer',
@@ -60,7 +86,17 @@ const projects = [
     year: 2026,
     repo: 'https://github.com/gulsherassad/macro_optimizer',
     live: null,
-    image: null,
+    theme: { bg: '#D9E4F4', url: 'macro-optimizer.local' },
+    images: [
+      {
+        src: 'projects/macro-2.webp',
+        alt: 'Macro Meal Optimizer day plan with macro targets and solved totals',
+      },
+      {
+        src: 'projects/macro-1.webp',
+        alt: 'Macro Meal Optimizer food library',
+      },
+    ],
   },
   {
     id: 'movie-review-platform',
@@ -74,7 +110,8 @@ const projects = [
     year: 2025,
     repo: 'https://github.com/gulsherassad/movie-review-platform',
     live: null,
-    image: null,
+    theme: null,
+    images: [],
   },
 ];
 

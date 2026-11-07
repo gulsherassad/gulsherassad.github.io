@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@fontsource/geist-mono": "^5.3.0",
@@ -24,6 +25,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "oxlint": "^1.90.0",
     "prettier": "^3.9.10",
+    "sharp": "^0.35.5",
     "vite": "^8.3.6"
   }
 }

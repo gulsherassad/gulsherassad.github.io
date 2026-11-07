@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import ExternalLink from './ExternalLink.jsx';
+import ProjectShowcase from './ProjectShowcase.jsx';
 import { pad } from './pad.js';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -11,6 +12,7 @@ export default function ProjectRow({
   onToggle,
   reduceMotion,
 }) {
+  const hasImages = project.images.length > 0;
   const buttonId = `project-${project.id}-button`;
   const panelId = `project-${project.id}-panel`;
 
@@ -65,32 +67,37 @@ export default function ProjectRow({
               reduceMotion ? { duration: 0 } : { duration: 0.5, ease: EASE }
             }
           >
-            <div className="project__panel-inner">
-              {project.image && (
-                <img
-                  className="project__image"
-                  src={project.image}
-                  alt={`Screenshot of ${project.title}`}
-                  loading="lazy"
-                />
-              )}
-              <p className="project__description">{project.description}</p>
-              <ul className="project__stack" aria-label="Tech stack">
-                {project.stack.map((tech) => (
-                  <li key={tech}>{tech}</li>
-                ))}
-              </ul>
-              <ul className="project__meta">
-                <li className="project__meta-role">Role: {project.role}</li>
-                <li>
-                  <ExternalLink href={project.repo}>Code</ExternalLink>
-                </li>
-                {project.live && (
+            <div
+              className={
+                hasImages
+                  ? 'project__panel-inner project__panel-inner--media'
+                  : 'project__panel-inner'
+              }
+            >
+              <div className="project__text">
+                <p className="project__description">{project.description}</p>
+                <ul className="project__stack" aria-label="Tech stack">
+                  {project.stack.map((tech) => (
+                    <li key={tech}>{tech}</li>
+                  ))}
+                </ul>
+                <ul className="project__meta">
+                  <li className="project__meta-role">Role: {project.role}</li>
                   <li>
-                    <ExternalLink href={project.live}>Live</ExternalLink>
+                    <ExternalLink href={project.repo}>Code</ExternalLink>
                   </li>
-                )}
-              </ul>
+                  {project.live && (
+                    <li>
+                      <ExternalLink href={project.live}>Live</ExternalLink>
+                    </li>
+                  )}
+                </ul>
+              </div>
+              <ProjectShowcase
+                images={project.images}
+                theme={project.theme}
+                reduceMotion={reduceMotion}
+              />
             </div>
           </motion.div>
         )}

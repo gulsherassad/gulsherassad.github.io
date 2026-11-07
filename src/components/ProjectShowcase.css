@@ -1,0 +1,139 @@
+/* Tinted backdrop; frames are absolutely positioned inside it. */
+.showcase {
+  --bar-height: 28px;
+  --dot-size: 8px;
+
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.showcase__slot {
+  position: absolute;
+}
+
+/* One image: centred, ~92% wide, set slightly into the bottom edge. */
+.showcase--single .showcase__slot--primary {
+  bottom: -5%;
+  left: 4%;
+  width: 92%;
+}
+
+/* Two images: the first top-left; the second smaller, overlapping it
+   bottom-right (~40% of the second's area) and bleeding off the bottom. */
+.showcase--pair .showcase__slot--primary {
+  top: 8%;
+  left: 6%;
+  width: 82%;
+}
+
+.showcase--pair .showcase__slot--secondary {
+  right: 2%;
+  bottom: -9%;
+  width: 52%;
+}
+
+/* Browser frame */
+
+.browser {
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.showcase__slot--secondary .browser {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.12),
+    0 24px 56px rgba(0, 0, 0, 0.32);
+}
+
+.browser__bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: var(--bar-height);
+  padding-inline: calc(var(--bar-height) * 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.browser__dots {
+  display: flex;
+  gap: calc(var(--dot-size) * 0.75);
+}
+
+.browser__dots span {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+}
+
+.browser__dots span:nth-child(1) {
+  background-color: #ff5f57;
+}
+
+.browser__dots span:nth-child(2) {
+  background-color: #febc2e;
+}
+
+.browser__dots span:nth-child(3) {
+  background-color: #28c840;
+}
+
+.browser__url {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 2px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.55);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 999px;
+}
+
+.browser--dark {
+  background-color: #1a1a1a;
+}
+
+.browser--dark .browser__bar {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.browser--dark .browser__url {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.browser__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Below 900px the backdrop sits under the text: smaller chrome, larger
+   second frame. */
+@media (max-width: 899px) {
+  .showcase {
+    --bar-height: 22px;
+    --dot-size: 7px;
+  }
+
+  .showcase--pair .showcase__slot--secondary {
+    width: 58%;
+  }
+
+  .browser__url {
+    padding: 1px 8px;
+    font-size: 9px;
+  }
+}
