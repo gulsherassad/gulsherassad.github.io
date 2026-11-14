@@ -11,3 +11,25 @@
   line-height: 1.5;
   text-wrap: pretty;
 }
+
+.about__toolbox {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: var(--space-6);
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  border-top: 1px solid var(--rule);
+}
+
+.about__toolbox div {
+  display: grid;
+  grid-template-columns: 8em minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: baseline;
+}
+
+.about__toolbox dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}

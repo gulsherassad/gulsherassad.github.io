@@ -1,11 +1,57 @@
 const projects = [
   {
+    id: 'darkwater',
+    title: 'Darkwater',
+    tagline: 'Live ship tracking and trajectory prediction from AIS data',
+    highlight: '60-min p90 error down 14.3%',
+    status: 'In progress',
+    description:
+      'A Go service ingests live AIS ship positions, tracks every vessel in memory and streams viewport-filtered updates to a deck.gl map once a second. A residual GRU trained in PyTorch runs inside the Go server through ONNX, with dead reckoning below 10 minutes and as the fallback. On 50,927 held-out predictions the hybrid cut 60-minute p90 error from 13.48 km to 11.55 km and was never worse than the baseline. Train and test are from the same day so far; a cross-day test is next.',
+    metrics: [
+      { value: '−14.3%', label: '60-min p90 error vs dead reckoning' },
+      { value: '50,927', label: 'held-out predictions scored' },
+      { value: '1.3M rows/s', label: 'CSV parser, constant memory' },
+    ],
+    chart: {
+      title: 'p90 position error by forecast horizon',
+      unit: 'km',
+      baseline: 'Dead reckoning',
+      model: 'Hybrid (GRU ≥ 10 min)',
+      rows: [
+        { label: '5 min', baseline: 0.31, model: 0.31 },
+        { label: '15 min', baseline: 1.93, model: 1.73 },
+        { label: '30 min', baseline: 5.28, model: 4.6 },
+        { label: '60 min', baseline: 13.48, model: 11.55 },
+      ],
+      note: 'Danish Maritime Authority AIS, 9 Nov 2026. Test split 18:00–24:00 UTC, moving ships only. Lower is better.',
+    },
+    stack: [
+      'Go',
+      'PyTorch',
+      'ONNX Runtime',
+      'WebSocket',
+      'TypeScript',
+      'deck.gl',
+    ],
+    role: 'Solo',
+    year: 2026,
+    repo: 'https://github.com/gulsherassad/darkwater',
+    live: null,
+    theme: null,
+    images: [],
+  },
+  {
     id: 'epl-predictor',
     title: 'EPL Predictor',
     tagline: 'Win, draw and scoreline odds for any Premier League match',
     highlight: '54.9% accuracy over 1,420 matches',
     description:
       'Blends an Elo rating model with a Poisson goals model to forecast Premier League results, served by a FastAPI backend with match and fixture pages. A walk-forward backtest over 1,420 matches reached 54.9% accuracy, in line with betting-market closing odds.',
+    metrics: [
+      { value: '54.9%', label: 'win/draw/loss accuracy' },
+      { value: '0.574', label: 'Brier score' },
+      { value: '1,420', label: 'matches backtested' },
+    ],
     stack: ['Python', 'FastAPI', 'scikit-learn', 'pandas', 'JavaScript'],
     role: 'Solo',
     year: 2026,
@@ -35,6 +81,10 @@ const projects = [
     highlight: '64.2% execution accuracy on BIRD',
     description:
       'Turns plain-English questions into SQL by giving an LLM the database schema, then runs the query on a read-only connection that rejects anything but a single SELECT. Reached 64.2% execution accuracy on all 500 BIRD Mini-Dev questions, with prompt changes driven by analysing failed queries.',
+    metrics: [
+      { value: '64.2%', label: 'execution accuracy' },
+      { value: '500', label: 'BIRD Mini-Dev questions' },
+    ],
     stack: ['Python', 'Claude API', 'FastAPI', 'SQLite', 'JavaScript'],
     role: 'Solo',
     year: 2026,
@@ -57,6 +107,10 @@ const projects = [
     highlight: 'Recall@10 up from 0.205 to 0.258',
     description:
       "Finds attackers in Europe's top five leagues who play like a given player, combining per-90 stats, chance creation and shot locations reduced to six zones with NMF. Evaluated by self-retrieval across 493 players, where adding shot zones raised recall@10 from 0.205 to 0.258; data refreshes weekly via GitHub Actions.",
+    metrics: [
+      { value: '0.258', label: 'recall@10, up from 0.205' },
+      { value: '493', label: 'players in the evaluation' },
+    ],
     stack: [
       'Python',
       'scikit-learn',

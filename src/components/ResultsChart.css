@@ -1,0 +1,93 @@
+.chart {
+  padding: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+}
+
+.chart__title {
+  font-size: var(--text-small);
+}
+
+.chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  padding: 0;
+  margin-top: var(--space-3);
+  color: var(--muted);
+  list-style: none;
+}
+
+.chart__key::before {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-inline-end: var(--space-2);
+  content: '';
+  border-radius: 2px;
+}
+
+.chart__key--baseline::before,
+.chart__bar--baseline {
+  background-color: #b9b4aa;
+}
+
+.chart__key--model::before,
+.chart__bar--model {
+  background-color: var(--text);
+}
+
+.chart__rows {
+  display: grid;
+  gap: var(--space-5);
+  padding: 0;
+  margin-top: var(--space-8);
+  list-style: none;
+}
+
+.chart__row {
+  display: grid;
+  grid-template-columns: 4.5em minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.chart__label {
+  color: var(--muted);
+}
+
+.chart__bars {
+  display: grid;
+  gap: 3px;
+}
+
+/* The value sits just past the end of its bar; the right padding reserves
+   room for it on the longest bar. */
+.chart__bar-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-inline-end: 3.5em;
+}
+
+.chart__bar {
+  flex: none;
+  min-width: 2px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.chart__note {
+  max-width: 60ch;
+  margin-top: var(--space-8);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 30rem) {
+  .chart {
+    padding: var(--space-5);
+  }
+}

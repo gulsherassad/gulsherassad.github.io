@@ -1,4 +1,6 @@
 import { m, useReducedMotion } from 'motion/react';
+import ExternalLink from './ExternalLink.jsx';
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from '../data/links.js';
 import './Hero.css';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -42,6 +44,28 @@ export default function Hero() {
           co-op roles in software engineering and ML.
         </p>
         <p className="hero__location">Kelowna, BC · Available 2027</p>
+        <ul className="hero__links">
+          <li>
+            <a className="tap-target" href="#projects">
+              See the work <span aria-hidden="true">↓</span>
+            </a>
+          </li>
+          <li>
+            <ExternalLink href={RESUME_URL} className="tap-target">
+              Resume
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href={GITHUB_URL} className="tap-target">
+              GitHub
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href={LINKEDIN_URL} className="tap-target">
+              LinkedIn
+            </ExternalLink>
+          </li>
+        </ul>
       </m.div>
     </section>
   );

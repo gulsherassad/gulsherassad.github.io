@@ -9,6 +9,14 @@ const PARAGRAPHS = [
   'I’m looking for 2027 co-op roles in software engineering and machine learning.',
 ];
 
+// Only tools used in the projects above.
+const TOOLBOX = [
+  ['Languages', 'Python, Go, TypeScript, JavaScript, SQL'],
+  ['ML and data', 'PyTorch, scikit-learn, pandas, ONNX Runtime, PuLP'],
+  ['Backend', 'FastAPI, PostgreSQL, SQLite, WebSockets, Docker'],
+  ['Frontend', 'React, Next.js, deck.gl'],
+];
+
 export default function About() {
   const reduceMotion = useReducedMotion();
 
@@ -38,6 +46,14 @@ export default function About() {
               {text}
             </m.p>
           ))}
+          <dl className="about__toolbox">
+            {TOOLBOX.map(([group, tools]) => (
+              <div key={group}>
+                <dt>{group}</dt>
+                <dd>{tools}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

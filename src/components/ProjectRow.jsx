@@ -1,6 +1,7 @@
 import { AnimatePresence, m } from 'motion/react';
 import ExternalLink from './ExternalLink.jsx';
 import ProjectShowcase from './ProjectShowcase.jsx';
+import ResultsChart from './ResultsChart.jsx';
 import { pad } from './pad.js';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -12,12 +13,13 @@ export default function ProjectRow({
   onToggle,
   reduceMotion,
 }) {
-  const hasImages = project.images.length > 0;
+  const hasMedia = project.images.length > 0 || Boolean(project.chart);
   const buttonId = `project-${project.id}-button`;
   const panelId = `project-${project.id}-panel`;
 
   return (
     <m.li
+      id={project.id}
       className="project"
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +43,12 @@ export default function ProjectRow({
             {pad(index + 1)}
           </span>
           <span className="project__main">
-            <span className="project__title">{project.title}</span>
+            <span className="project__title">
+              {project.title}
+              {project.status && (
+                <span className="project__status">{project.status}</span>
+              )}
+            </span>
             <span className="project__tagline">{project.tagline}</span>
           </span>
           <span className="project__highlight">{project.highlight}</span>
@@ -69,12 +76,22 @@ export default function ProjectRow({
           >
             <div
               className={
-                hasImages
+                hasMedia
                   ? 'project__panel-inner project__panel-inner--media'
                   : 'project__panel-inner'
               }
             >
               <div className="project__text">
+                {project.metrics && (
+                  <dl className="project__metrics">
+                    {project.metrics.map((metric) => (
+                      <div key={metric.label}>
+                        <dt>{metric.label}</dt>
+                        <dd>{metric.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
                 <p className="project__description">{project.description}</p>
                 <ul className="project__stack" aria-label="Tech stack">
                   {project.stack.map((tech) => (
@@ -103,6 +120,7 @@ export default function ProjectRow({
                   )}
                 </ul>
               </div>
+              {project.chart && <ResultsChart chart={project.chart} />}
               <ProjectShowcase
                 images={project.images}
                 theme={project.theme}
