@@ -33,3 +33,75 @@
   font-size: var(--text-xs);
   color: var(--muted);
 }
+
+/* Left column: the "About" label, an optional portrait and quick facts. */
+.about__aside {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.about__facts-wrap {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.about__photo {
+  width: min(100%, 12rem);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+
+/* Narrow: a compact two-column list under the label, before the paragraphs. */
+.about__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5) var(--space-6);
+  font-size: var(--text-small);
+  line-height: 1.4;
+}
+
+.about__facts div {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+}
+
+.about__facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.about__facts a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 200ms var(--ease-out);
+}
+
+.about__facts a:hover {
+  color: var(--accent-text);
+}
+
+/* Wide: one fact per line, and the whole column follows the reader down the
+   section. Sticky keeps it inside the split, so it stops with the paragraphs
+   and never reaches Contact. The top padding puts the label on the first
+   paragraph's baseline, as the split's baseline alignment did before. */
+@media (min-width: 900px) {
+  .about__aside {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-8));
+    align-self: start;
+    max-width: 17rem;
+    padding-top: calc((var(--text-lead) - var(--text-small)) * 0.95);
+  }
+
+  .about__facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    font-size: var(--text-body);
+  }
+}
