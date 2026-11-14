@@ -83,7 +83,6 @@ export default function About() {
           {PARAGRAPHS.map((text, i) => (
             <m.p
               key={i}
-              className={i === 0 ? 'about__statement' : undefined}
               initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '0px 0px -10% 0px' }}

@@ -2,8 +2,7 @@
   padding-top: var(--section-space);
 }
 
-/* The text fills the column: an opening statement in the serif, then two
-   large paragraphs. */
+/* Large paragraphs that fill the column. */
 .about__body {
   display: flex;
   flex-direction: column;
@@ -11,13 +10,6 @@
   font-size: var(--text-lead-lg);
   line-height: 1.5;
   text-wrap: pretty;
-}
-
-.about__statement {
-  font-family: var(--font-serif);
-  font-size: var(--text-statement);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
 }
 
 .about__toolbox {
@@ -98,7 +90,7 @@
 /* Wide: one fact per line, and the whole column follows the reader down the
    section. Sticky keeps it inside the split, so it stops with the paragraphs
    and never reaches Contact. It takes the split's baseline alignment, which
-   sets the label on the statement's first line. */
+   sets the label on the first paragraph's first line. */
 @media (min-width: 900px) {
   .about__aside {
     position: sticky;
