@@ -4,17 +4,17 @@
 
 .contact__lead {
   font-family: var(--font-serif);
-  font-size: var(--text-h2);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .contact__email-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: var(--space-3) var(--space-5);
-  margin-top: var(--space-6);
+  gap: var(--space-4) var(--space-6);
+  margin-top: var(--space-10);
 }
 
 /* Underline draws in left to right on hover / focus. */
@@ -23,7 +23,7 @@
   min-width: 0;
   /* Sans, not the serif: its 1 and l are easy to tell apart in an address. */
   font-family: var(--font-sans);
-  font-size: var(--text-title);
+  font-size: var(--text-email);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -79,11 +79,12 @@
 .contact__links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2) var(--space-6);
-  margin-top: var(--space-12);
+  /* The column gap narrows on phones so all three links stay on one line. */
+  gap: var(--space-3) clamp(var(--space-4), 3vw, var(--space-8));
+  margin-top: var(--space-16);
   padding: 0;
   font-family: var(--font-mono);
-  font-size: var(--text-small);
+  font-size: var(--text-lead);
   list-style: none;
 }
 
