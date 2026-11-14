@@ -33,27 +33,3 @@
   font-size: var(--text-xs);
   color: var(--muted);
 }
-
-/* The page's own measurements (PageMetrics.jsx). min-height holds the space
-   for the numbers, which arrive just before the block scrolls into view. */
-.page-metrics {
-  display: grid;
-  align-content: start;
-  gap: var(--space-5);
-  min-height: 9rem;
-  padding-top: var(--space-6);
-  margin-top: var(--space-4);
-  font-size: var(--text-body);
-  border-top: 1px solid var(--rule);
-}
-
-.page-metrics__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--muted);
-}
-
-/* Keep the numbers on one line when a label wraps to two. */
-.page-metrics .project__metrics {
-  align-items: flex-start;
-}

@@ -1,5 +1,4 @@
 import { m, useReducedMotion } from 'motion/react';
-import PageMetrics from './PageMetrics.jsx';
 import './About.css';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -55,7 +54,6 @@ export default function About() {
               </div>
             ))}
           </dl>
-          <PageMetrics reduceMotion={reduceMotion} />
         </div>
       </div>
     </section>
