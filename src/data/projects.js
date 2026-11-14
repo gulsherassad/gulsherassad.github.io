@@ -4,9 +4,12 @@ const projects = [
     title: 'Darkwater',
     tagline: 'Live ship tracking and trajectory prediction from AIS data',
     highlight: '60-min p90 error down 14.3%',
+    // Tiny bars beside the highlight in the project list: baseline vs model,
+    // or one value out of `max`. Real results only; omit when there is none.
+    spark: { baseline: 13.48, model: 11.55 },
     status: 'In progress',
     description:
-      'A Go service ingests live AIS ship positions, tracks every vessel in memory and streams viewport-filtered updates to a deck.gl map once a second. A residual GRU trained in PyTorch runs inside the Go server through ONNX, with dead reckoning below 10 minutes and as the fallback. On 50,927 held-out predictions the hybrid cut 60-minute p90 error from 13.48 km to 11.55 km and was never worse than the baseline. Train and test are from the same day so far; a cross-day test is next.',
+      'A Go service ingests live AIS ship positions, tracks every vessel in memory and streams viewport-filtered updates to a deck.gl map once a second. A coverage map built on H3 cells compares the free live feed with official Danish Maritime Authority data and shows the feed passes on roughly 1 in 10–20 messages per ship. A residual GRU trained in PyTorch runs inside the Go server through ONNX, with dead reckoning below 10 minutes and as the fallback. On 50,927 held-out predictions the hybrid cut 60-minute p90 error from 13.48 km to 11.55 km and was never worse than the baseline. Train and test are from the same day so far; a cross-day test is next.',
     metrics: [
       { value: '−14.3%', label: '60-min p90 error vs dead reckoning' },
       { value: '50,927', label: 'held-out predictions scored' },
@@ -37,14 +40,23 @@ const projects = [
     year: 2026,
     repo: 'https://github.com/gulsherassad/darkwater',
     live: null,
-    theme: null,
-    images: [],
+    theme: { bg: '#0B1016', url: 'localhost:8080' },
+    frameRatio: '16 / 10', // screenshot crop in its browser frame; default 4 / 3
+    images: [
+      {
+        src: 'projects/darkwater-1.webp',
+        width: 1600,
+        height: 946,
+        alt: 'Darkwater coverage map of Danish waters: hexagonal cells coloured by whether official DMA data, the live feed or both saw ships, with live vessels shown as arrows',
+      },
+    ],
   },
   {
     id: 'epl-predictor',
     title: 'EPL Predictor',
     tagline: 'Win, draw and scoreline odds for any Premier League match',
     highlight: '54.9% accuracy over 1,420 matches',
+    spark: { model: 54.9, max: 100 },
     description:
       'Blends an Elo rating model with a Poisson goals model to forecast Premier League results, served by a FastAPI backend with match and fixture pages. A walk-forward backtest over 1,420 matches reached 54.9% accuracy, in line with betting-market closing odds.',
     metrics: [
@@ -79,6 +91,7 @@ const projects = [
     title: 'Querybird',
     tagline: 'Ask a database questions in plain English',
     highlight: '64.2% execution accuracy on BIRD',
+    spark: { model: 64.2, max: 100 },
     description:
       'Turns plain-English questions into SQL by giving an LLM the database schema, then runs the query on a read-only connection that rejects anything but a single SELECT. Reached 64.2% execution accuracy on all 500 BIRD Mini-Dev questions, with prompt changes driven by analysing failed queries.',
     metrics: [
@@ -105,6 +118,7 @@ const projects = [
     title: 'Scout',
     tagline: 'Find attacking players who play like a player you name',
     highlight: 'Recall@10 up from 0.205 to 0.258',
+    spark: { baseline: 0.205, model: 0.258 },
     description:
       "Finds attackers in Europe's top five leagues who play like a given player, combining per-90 stats, chance creation and shot locations reduced to six zones with NMF. Evaluated by self-retrieval across 493 players, where adding shot zones raised recall@10 from 0.205 to 0.258; data refreshes weekly via GitHub Actions.",
     metrics: [

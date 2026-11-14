@@ -46,6 +46,27 @@
   color: var(--accent-text);
 }
 
+/* Theme toggle: names the theme it switches to. Wide enough for "Light" so
+   the nav doesn't shift when the label changes. */
+.header__theme {
+  min-width: 5ch;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: inherit;
+  text-align: right;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color 200ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .header__theme:hover {
+    color: var(--accent-text);
+  }
+}
+
 @media (max-width: 40rem) {
   .header__inner {
     padding-block: var(--space-4);

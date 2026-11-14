@@ -1,4 +1,11 @@
+/* Positions the track field canvas, and keeps its z-index: -1 above the page
+   background but below the hero's content. */
 .hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero__inner {
   /* Lets the headline size itself to this box's content width (cqi). */
   container-type: inline-size;
   display: flex;
@@ -7,6 +14,74 @@
   min-height: min(85vh, 760px);
   min-height: min(85svh, 760px);
   padding-block: var(--space-16) var(--space-20);
+}
+
+/* "Currently building" pill above the headline. Its solid background keeps
+   the track field from showing through behind the text. */
+.hero__status-line {
+  margin-bottom: var(--space-6);
+}
+
+.hero__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 6px var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  text-decoration: none;
+  background-color: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 1.25rem;
+  transition:
+    color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .hero__status:hover {
+    color: var(--accent-text);
+    border-color: var(--accent);
+  }
+}
+
+.hero__status-dot {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background-color: var(--live);
+  border-radius: 50%;
+}
+
+/* The pulse: a copy of the dot that grows and fades. */
+.hero__status-dot::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background-color: var(--live);
+  border-radius: 50%;
+  animation: status-pulse 2s var(--ease-out) infinite;
+}
+
+@keyframes status-pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__status-dot::after {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 .hero__title {

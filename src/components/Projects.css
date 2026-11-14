@@ -69,10 +69,40 @@
 }
 
 .project__highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
   grid-area: highlight;
   font-family: var(--font-mono);
   font-size: var(--text-small);
   text-align: right;
+}
+
+/* Sparkline under the highlight (Spark in ProjectRow.jsx). */
+.spark {
+  display: grid;
+  gap: 2px;
+  width: 6rem;
+}
+
+.spark__bar {
+  height: 3px;
+  border-radius: 1.5px;
+}
+
+.spark__bar--baseline {
+  background-color: var(--bar-baseline);
+}
+
+.spark__bar--model {
+  background-color: var(--text);
+}
+
+/* One value out of a maximum: the bar sits on a full-width track. */
+.spark--single {
+  background-color: var(--rule);
+  border-radius: 1.5px;
 }
 
 .project__year {
@@ -172,7 +202,14 @@
   padding-inline-start: calc(var(--index-col) + var(--col-gap));
 }
 
-/* Text left, showcase right on wide screens; showcase below otherwise. */
+/* Showcase, then results chart, stacked in one column. */
+.project__media {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+/* Text left, media right on wide screens; media below otherwise. */
 @media (min-width: 900px) {
   .project__panel-inner--media {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -269,6 +306,7 @@
   }
 
   .project__highlight {
+    align-items: flex-start;
     text-align: left;
   }
 
@@ -318,6 +356,26 @@
   font-family: var(--font-serif);
   font-size: var(--text-title);
   line-height: 1;
+}
+
+/* Count-up number. The final value is in the layout from the start (and is
+   what screen readers get), invisible while the animated copy counts up over
+   it, so nothing shifts as digits are added. */
+.countup {
+  position: relative;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.countup__final {
+  opacity: 0;
+}
+
+.countup__live {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .project__metrics dt {

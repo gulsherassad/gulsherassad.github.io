@@ -31,7 +31,7 @@
 
 .chart__key--baseline::before,
 .chart__bar--baseline {
-  background-color: #b9b4aa;
+  background-color: var(--bar-baseline);
 }
 
 .chart__key--model::before,

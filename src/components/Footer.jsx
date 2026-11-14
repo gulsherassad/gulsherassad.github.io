@@ -1,3 +1,5 @@
+import ExternalLink from './ExternalLink.jsx';
+import { SOURCE_URL } from '../data/links.js';
 import './Footer.css';
 
 // Scroll to the top and put focus on the skip link, so the next Tab starts
@@ -18,9 +20,20 @@ export default function Footer() {
     <footer className="footer container">
       <div className="footer__inner">
         <p>© 2026 Gulsher Assad</p>
-        <a className="tap-target" href="#main" onClick={backToTop}>
-          Back to top <span aria-hidden="true">↑</span>
-        </a>
+        {/* __BUILD_DATE__ is set at build time in vite.config.js. */}
+        <p>Updated {__BUILD_DATE__}</p>
+        <ul className="footer__links">
+          <li>
+            <ExternalLink href={SOURCE_URL} className="tap-target">
+              Source
+            </ExternalLink>
+          </li>
+          <li>
+            <a className="tap-target" href="#main" onClick={backToTop}>
+              Back to top <span aria-hidden="true">↑</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </footer>
   );

@@ -10,21 +10,38 @@ const idFromHash = () => {
   return projects.some((project) => project.id === id) ? id : null;
 };
 
+// A project can be linked directly: /#darkwater opens that row. With no
+// link, wide screens start with Darkwater open; narrow ones start closed so
+// the list stays scannable.
+const initialOpenId = () =>
+  idFromHash() ??
+  (window.matchMedia('(min-width: 900px)').matches ? 'darkwater' : null);
+
 export default function Projects() {
-  // A project can be linked directly: /#darkwater opens that row.
-  const [openId, setOpenId] = useState(idFromHash);
+  const [openId, setOpenId] = useState(initialOpenId);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    let frame = 0;
     const scrollToOpen = () => {
       const id = idFromHash();
       if (!id) return;
       setOpenId(id);
-      document.getElementById(id)?.scrollIntoView();
+      // Scroll two frames later: mounting the panel in the same tick cancels
+      // a smooth scroll that has already started, leaving the page where it was.
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        frame = requestAnimationFrame(() => {
+          document.getElementById(id)?.scrollIntoView();
+        });
+      });
     };
     scrollToOpen();
     window.addEventListener('hashchange', scrollToOpen);
-    return () => window.removeEventListener('hashchange', scrollToOpen);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('hashchange', scrollToOpen);
+    };
   }, []);
 
   const toggle = (id) => {

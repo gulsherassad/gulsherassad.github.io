@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { m } from 'motion/react';
 import { assetUrl } from './assetUrl.js';
 import './ProjectShowcase.css';
@@ -43,7 +44,39 @@ function BrowserFrame({ image, url, dark }) {
  * Screenshots composed in browser frames on a tinted backdrop. One image sits
  * centred and bleeds off the bottom; a second overlaps the first bottom-right.
  */
-export default function ProjectShowcase({ images, theme, reduceMotion }) {
+export default function ProjectShowcase({
+  images,
+  theme,
+  frameRatio = '4 / 3',
+  reduceMotion,
+}) {
+  // Spotlight: a soft highlight on the backdrop that follows a mouse or pen.
+  // Its position is written to CSS variables at most once per frame; CSS
+  // (fine pointers only) fades it in on hover and out on leave.
+  const spotlight = useRef(null);
+  const pointer = useRef({ x: 0, y: 0, frame: 0 });
+
+  useEffect(() => {
+    const state = pointer.current;
+    return () => cancelAnimationFrame(state.frame);
+  }, []);
+
+  const moveSpotlight = (event) => {
+    if (event.pointerType === 'touch') return;
+    const state = pointer.current;
+    state.x = event.clientX;
+    state.y = event.clientY;
+    if (state.frame) return;
+    state.frame = requestAnimationFrame(() => {
+      state.frame = 0;
+      const node = spotlight.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      node.style.setProperty('--spot-x', `${state.x - rect.left}px`);
+      node.style.setProperty('--spot-y', `${state.y - rect.top}px`);
+    });
+  };
+
   if (images.length === 0) return null;
 
   const bg = theme?.bg ?? FALLBACK_BG;
@@ -75,12 +108,18 @@ export default function ProjectShowcase({ images, theme, reduceMotion }) {
       className={
         secondary ? 'showcase showcase--pair' : 'showcase showcase--single'
       }
-      style={{ backgroundColor: bg }}
+      style={{ backgroundColor: bg, '--frame-ratio': frameRatio }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
+      onPointerMove={moveSpotlight}
       {...(reduceMotion ? {} : { whileHover: 'lifted' })}
     >
+      <span
+        className="showcase__spotlight"
+        ref={spotlight}
+        aria-hidden="true"
+      />
       <m.div
         className="showcase__slot showcase__slot--primary"
         {...enter({ y: 32 }, 0.1)}

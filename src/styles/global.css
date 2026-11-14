@@ -108,3 +108,34 @@ main:focus {
     gap: var(--space-6);
   }
 }
+
+/* Reading progress: a 2px bar across the top, driven by the page's scroll
+   position with no JS. Only where scroll timelines are supported, and not
+   for reduced motion. */
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      display: block;
+      height: 2px;
+      pointer-events: none;
+      background-color: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: scroll-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes scroll-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
