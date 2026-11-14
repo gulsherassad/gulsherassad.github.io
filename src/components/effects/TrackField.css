@@ -1,0 +1,66 @@
+/* Fills the hero, behind its content. The mask keeps the field to the space
+   above the headline and fades it out across the headline, so nothing is
+   drawn behind the intro text and links. --fade-from / --fade-to are the
+   headline's top and just past halfway down it, measured by
+   TrackField.jsx; the values here are fallbacks until it has run. */
+.track-field {
+  --fade-from: 24%;
+  --fade-to: 55%;
+  --field-mask: linear-gradient(
+    to bottom,
+    transparent,
+    #000 3rem,
+    #000 var(--fade-from),
+    transparent var(--fade-to)
+  );
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: var(--field-mask);
+  mask-image: var(--field-mask);
+}
+
+/* Wide screens: the headline and intro leave the right-hand side empty, so
+   the field also shows there, fading out towards the text. */
+@media (min-width: 900px) {
+  .track-field {
+    --field-mask:
+      linear-gradient(
+        to bottom,
+        transparent,
+        #000 3rem,
+        #000 var(--fade-from),
+        transparent var(--fade-to)
+      ),
+      radial-gradient(ellipse 38% 50% at 100% 80%, #000, transparent);
+  }
+}
+
+/* Forecast error for the ship under the pointer; positioned and filled in by
+   TrackField.jsx. Solid background, so it reads over anything. */
+.track-field__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--text);
+  white-space: nowrap;
+  pointer-events: none;
+  background-color: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.track-field__label--visible {
+  opacity: 1;
+}

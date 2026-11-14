@@ -1,10 +1,40 @@
 import { AnimatePresence, m } from 'motion/react';
+import CountUp from './CountUp.jsx';
 import ExternalLink from './ExternalLink.jsx';
 import ProjectShowcase from './ProjectShowcase.jsx';
 import ResultsChart from './ResultsChart.jsx';
 import { pad } from './pad.js';
 
 const EASE = [0.22, 1, 0.36, 1];
+
+/**
+ * Sparkline for a row's headline result: a baseline bar over a model bar, or
+ * a single bar on a track when the result is one value out of `max`.
+ * Decorative: the highlight text beside it states the result.
+ */
+function Spark({ spark }) {
+  const single = spark.baseline == null;
+  const max = spark.max ?? Math.max(spark.baseline, spark.model);
+  const width = (value) => `${(value / max) * 100}%`;
+
+  return (
+    <span
+      className={single ? 'spark spark--single' : 'spark'}
+      aria-hidden="true"
+    >
+      {!single && (
+        <span
+          className="spark__bar spark__bar--baseline"
+          style={{ width: width(spark.baseline) }}
+        />
+      )}
+      <span
+        className="spark__bar spark__bar--model"
+        style={{ width: width(spark.model) }}
+      />
+    </span>
+  );
+}
 
 export default function ProjectRow({
   project,
@@ -51,7 +81,10 @@ export default function ProjectRow({
             </span>
             <span className="project__tagline">{project.tagline}</span>
           </span>
-          <span className="project__highlight">{project.highlight}</span>
+          <span className="project__highlight">
+            {project.highlight}
+            {project.spark && <Spark spark={project.spark} />}
+          </span>
           <span className="project__year">{project.year}</span>
           <span className="project__icon" aria-hidden="true">
             <span className="project__plus" />
@@ -87,7 +120,12 @@ export default function ProjectRow({
                     {project.metrics.map((metric) => (
                       <div key={metric.label}>
                         <dt>{metric.label}</dt>
-                        <dd>{metric.value}</dd>
+                        <dd>
+                          <CountUp
+                            value={metric.value}
+                            reduceMotion={reduceMotion}
+                          />
+                        </dd>
                       </div>
                     ))}
                   </dl>
@@ -120,12 +158,17 @@ export default function ProjectRow({
                   )}
                 </ul>
               </div>
-              {project.chart && <ResultsChart chart={project.chart} />}
-              <ProjectShowcase
-                images={project.images}
-                theme={project.theme}
-                reduceMotion={reduceMotion}
-              />
+              {hasMedia && (
+                <div className="project__media">
+                  <ProjectShowcase
+                    images={project.images}
+                    theme={project.theme}
+                    frameRatio={project.frameRatio}
+                    reduceMotion={reduceMotion}
+                  />
+                  {project.chart && <ResultsChart chart={project.chart} />}
+                </div>
+              )}
             </div>
           </m.div>
         )}

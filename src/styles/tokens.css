@@ -1,13 +1,17 @@
 :root {
   /* Colour. Accent is for hover / focus / active states only: --accent for
      outlines, borders and icons (3.6:1, fine for non-text); --accent-text for
-     accent-coloured text (4.8:1, passes AA). */
+     accent-coloured text (4.8:1, passes AA). Two deliberate exceptions use
+     --accent at rest: the scroll progress bar and a few ships in the hero. */
+  color-scheme: light;
   --bg: #f4f2ee;
   --text: #141414;
   --muted: #6b6862;
   --rule: #d9d5cd;
   --accent: #e5461f;
   --accent-text: #c4381a;
+  --bar-baseline: #b9b4aa; /* results chart: the baseline's bars */
+  --live: #3ddc97; /* hero status dot */
 
   /* Font families */
   --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
@@ -49,4 +53,18 @@
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark palette. The site is light by default; index.html sets data-theme
+   before first paint from the saved choice and the header toggle switches it. Contrast on --bg:
+   --text 15.9:1, --muted 6.5:1, --accent-text 7.5:1, --accent 6.8:1. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0e0f11;
+  --text: #eceae5;
+  --muted: #9a968e;
+  --rule: #26272a;
+  --accent: #ff6a45;
+  --accent-text: #ff7a58;
+  --bar-baseline: #66635d;
 }

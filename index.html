@@ -10,6 +10,20 @@
     />
     <link rel="canonical" href="https://gulsherassad.github.io/" />
     <meta name="theme-color" content="#F4F2EE" />
+    <!-- Sets the theme before first paint: light unless the visitor has
+         chosen dark with the header toggle. Colours match useTheme.js. -->
+    <script>
+      (function () {
+        var theme = 'light';
+        try {
+          if (localStorage.getItem('theme') === 'dark') theme = 'dark';
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute('content', theme === 'dark' ? '#0E0F11' : '#F4F2EE');
+      })();
+    </script>
 
     <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
     <link

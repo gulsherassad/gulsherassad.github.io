@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ExternalLink from './ExternalLink.jsx';
 import { RESUME_URL } from '../data/links.js';
+import { useTheme } from './useTheme.js';
 import './Header.css';
 
 const NAV_LINKS = [
@@ -12,6 +13,8 @@ const NAV_LINKS = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
+  const [theme, toggleTheme] = useTheme();
+  const otherTheme = theme === 'dark' ? 'light' : 'dark';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -55,6 +58,16 @@ export default function Header() {
               <ExternalLink href={RESUME_URL} className="tap-target">
                 Resume
               </ExternalLink>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="header__theme tap-target"
+                aria-label={`Switch to ${otherTheme} theme`}
+                onClick={toggleTheme}
+              >
+                {otherTheme === 'dark' ? 'Dark' : 'Light'}
+              </button>
             </li>
           </ul>
         </nav>

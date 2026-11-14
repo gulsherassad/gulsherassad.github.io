@@ -1,5 +1,8 @@
-/* Tinted backdrop; frames are absolutely positioned inside it. */
+/* Tinted backdrop; frames are absolutely positioned inside it.
+   --frame-ratio (set per project, default 4 / 3) is the crop of each
+   screenshot inside its browser frame. */
 .showcase {
+  --frame-ratio: 4 / 3;
   --bar-height: 28px;
   --dot-size: 8px;
 
@@ -7,6 +10,44 @@
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 10px;
+}
+
+/* A single frame is 88% of the backdrop's width, so the backdrop follows the
+   frame's ratio to keep the same margins around it (4 / 3 gives 4 / 3). */
+.showcase--single {
+  aspect-ratio: 1 / calc(0.75 + (1 / (var(--frame-ratio)) - 0.75) * 0.88);
+}
+
+/* On the dark page a dark backdrop (Darkwater's) has no visible edge of its
+   own, so every backdrop gets a hairline there. */
+:root[data-theme='dark'] .showcase {
+  outline: 1px solid var(--rule);
+  outline-offset: -1px;
+}
+
+/* Pointer spotlight, positioned by ProjectShowcase.jsx. Mouse / pen only. */
+.showcase__spotlight {
+  position: absolute;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle 24rem at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .showcase__spotlight {
+    display: block;
+  }
+
+  .showcase:hover .showcase__spotlight {
+    opacity: 1;
+  }
 }
 
 .showcase__slot {
@@ -116,7 +157,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3; /* screenshots are taller; crop from the top down */
+  aspect-ratio: var(--frame-ratio); /* crop from the top down */
   object-fit: cover;
   object-position: top;
 }
